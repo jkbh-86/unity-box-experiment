@@ -5,18 +5,19 @@ using UnityEngine;
 public class Player_Move : MonoBehaviour {
 
 	public List<Stackable> BodyStack;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
+    Animator animator;
+    // Use this for initialization
+    void Start () {
+        animator = GetComponentsInChildren<Animator>()[0];
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		float h_Input = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
 		float z_Input = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
 
-		transform.Rotate(0, h_Input, 0);
+        animator.SetBool("Walking", h_Input + z_Input > 0);
+        transform.Rotate(0, h_Input, 0);
 		transform.Translate(0, 0, z_Input);
 
 		if (Input.GetKeyDown(KeyCode.Space))

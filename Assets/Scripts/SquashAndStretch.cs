@@ -6,7 +6,7 @@ public class SquashAndStretch : MonoBehaviour
     private static readonly int RadiusID = Shader.PropertyToID("_Radius");
     private static MaterialPropertyBlock _mpb;
 
-    public MeshRenderer MeshRenderer;
+    public Renderer MeshRenderer;
     public float CollisionRadius = 0.5f;
 
     [Header("Spring")]

@@ -84,6 +84,70 @@ ModelImporter:
     100156: Root
     100158: model
     100160: rig
+    100162: Ctrl_ChestEndEffector
+    100164: Ctrl_ChestOriginEffector
+    100166: Ctrl_Head
+    100168: Ctrl_HeadEffector
+    100170: Ctrl_Hips
+    100172: Ctrl_HipsEffector
+    100174: Ctrl_LeftAnkleEffector
+    100176: Ctrl_LeftArm
+    100178: Ctrl_LeftElbowEffector
+    100180: Ctrl_LeftFoot
+    100182: Ctrl_LeftFootEffector
+    100184: Ctrl_LeftForeArm
+    100186: Ctrl_LeftHand
+    100188: Ctrl_LeftHipEffector
+    100190: Ctrl_LeftKneeEffector
+    100192: Ctrl_LeftLeg
+    100194: Ctrl_LeftShoulder
+    100196: Ctrl_LeftShoulderEffector
+    100198: Ctrl_LeftToeBase
+    100200: Ctrl_LeftUpLeg
+    100202: Ctrl_LeftWristEffector
+    100204: Ctrl_Neck
+    100206: Ctrl_Reference
+    100208: Ctrl_RightAnkleEffector
+    100210: Ctrl_RightArm
+    100212: Ctrl_RightElbowEffector
+    100214: Ctrl_RightFoot
+    100216: Ctrl_RightFootEffector
+    100218: Ctrl_RightForeArm
+    100220: Ctrl_RightHand
+    100222: Ctrl_RightHipEffector
+    100224: Ctrl_RightKneeEffector
+    100226: Ctrl_RightLeg
+    100228: Ctrl_RightShoulder
+    100230: Ctrl_RightShoulderEffector
+    100232: Ctrl_RightToeBase
+    100234: Ctrl_RightUpLeg
+    100236: Ctrl_RightWristEffector
+    100238: Ctrl_Spine
+    100240: Ctrl_Spine1
+    100242: Ctrl_Spine2
+    100244: Head
+    100246: Hips
+    100248: LeftArm
+    100250: LeftFoot
+    100252: LeftForeArm
+    100254: LeftHand
+    100256: LeftLeg
+    100258: LeftShoulder
+    100260: LeftToeBase
+    100262: LeftUpLeg
+    100264: Neck
+    100266: Reference
+    100268: RightArm
+    100270: RightFoot
+    100272: RightForeArm
+    100274: RightHand
+    100276: RightLeg
+    100278: RightShoulder
+    100280: RightToeBase
+    100282: RightUpLeg
+    100284: Spine
+    100286: Spine1
+    100288: Spine2
     400000: Body
     400002: Character3_Ctrl_ChestEndEffector
     400004: Character3_Ctrl_ChestOriginEffector
@@ -165,6 +229,70 @@ ModelImporter:
     400156: Root
     400158: model
     400160: rig
+    400162: Ctrl_ChestEndEffector
+    400164: Ctrl_ChestOriginEffector
+    400166: Ctrl_Head
+    400168: Ctrl_HeadEffector
+    400170: Ctrl_Hips
+    400172: Ctrl_HipsEffector
+    400174: Ctrl_LeftAnkleEffector
+    400176: Ctrl_LeftArm
+    400178: Ctrl_LeftElbowEffector
+    400180: Ctrl_LeftFoot
+    400182: Ctrl_LeftFootEffector
+    400184: Ctrl_LeftForeArm
+    400186: Ctrl_LeftHand
+    400188: Ctrl_LeftHipEffector
+    400190: Ctrl_LeftKneeEffector
+    400192: Ctrl_LeftLeg
+    400194: Ctrl_LeftShoulder
+    400196: Ctrl_LeftShoulderEffector
+    400198: Ctrl_LeftToeBase
+    400200: Ctrl_LeftUpLeg
+    400202: Ctrl_LeftWristEffector
+    400204: Ctrl_Neck
+    400206: Ctrl_Reference
+    400208: Ctrl_RightAnkleEffector
+    400210: Ctrl_RightArm
+    400212: Ctrl_RightElbowEffector
+    400214: Ctrl_RightFoot
+    400216: Ctrl_RightFootEffector
+    400218: Ctrl_RightForeArm
+    400220: Ctrl_RightHand
+    400222: Ctrl_RightHipEffector
+    400224: Ctrl_RightKneeEffector
+    400226: Ctrl_RightLeg
+    400228: Ctrl_RightShoulder
+    400230: Ctrl_RightShoulderEffector
+    400232: Ctrl_RightToeBase
+    400234: Ctrl_RightUpLeg
+    400236: Ctrl_RightWristEffector
+    400238: Ctrl_Spine
+    400240: Ctrl_Spine1
+    400242: Ctrl_Spine2
+    400244: Head
+    400246: Hips
+    400248: LeftArm
+    400250: LeftFoot
+    400252: LeftForeArm
+    400254: LeftHand
+    400256: LeftLeg
+    400258: LeftShoulder
+    400260: LeftToeBase
+    400262: LeftUpLeg
+    400264: Neck
+    400266: Reference
+    400268: RightArm
+    400270: RightFoot
+    400272: RightForeArm
+    400274: RightHand
+    400276: RightLeg
+    400278: RightShoulder
+    400280: RightToeBase
+    400282: RightUpLeg
+    400284: Spine
+    400286: Spine1
+    400288: Spine2
     2100000: MatPurple
     2100002: MatYellow
     2100004: MatLeg

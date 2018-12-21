@@ -8,7 +8,7 @@ Shader "PicoTanks/SquashAndStretch"
 		_Squash("Squash", Float) = 0
 		_Radius("Radius", Float) = 1
 		_SquashEffect("SquashEffect", Float) = 1
-		_SquashCurve("SquashCurve", Float) = 0
+		_SquashCurve("SquashCurve", Float) = 0.6
 		_StretchEffect("StretchEffect", Float) = 1
 		_StretchCurve("StretchCurve", Float) = 0
 		[HideInInspector] __dirty( "", Int ) = 1
