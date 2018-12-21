@@ -319,6 +319,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d75ace1644bb274ab56cf77e6ff078f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitionTime: 3
+  pixelLevel: 2
+  maxPixelLevel: 20
 --- !u!114 &829956169
 MonoBehaviour:
   m_ObjectHideFlags: 0
