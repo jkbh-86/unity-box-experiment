@@ -2499,7 +2499,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.95, y: 0.95, z: 0.95}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95242215139580770
 Animator:
@@ -2513,7 +2513,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 9fc87c23074029f4a90bd17579d8c8ac, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -2546,7 +2546,7 @@ MonoBehaviour:
   CollisionRadius: 1
   Strength: 5
   Dampening: 0.3
-  VelocityStretch: 0.8
+  VelocityStretch: 1
   Test: 0
   Squash: 0
 --- !u!137 &137100172754771318
