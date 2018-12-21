@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: 9493f970b4fc5a0419956ee36a12046e
+guid: 703c961dd1e09664595043d9779d4966
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Body
+    100000: //RootNode
     100002: Character3_Ctrl_ChestEndEffector
     100004: Character3_Ctrl_ChestOriginEffector
     100006: Character3_Ctrl_Head
@@ -45,44 +45,8 @@ ModelImporter:
     100078: Character3_Ctrl_Spine
     100080: Character3_Ctrl_Spine1
     100082: Character3_Ctrl_Spine2
-    100084: Character3_Head
-    100086: Character3_Hips
-    100088: Character3_LeftArm
-    100090: Character3_LeftFoot
-    100092: Character3_LeftForeArm
-    100094: Character3_LeftHand
-    100096: Character3_LeftLeg
-    100098: Character3_LeftShoulder
-    100100: Character3_LeftToeBase
-    100102: Character3_LeftUpLeg
-    100104: Character3_Neck
-    100106: Character3_Reference
-    100108: Character3_RightArm
-    100110: Character3_RightFoot
-    100112: Character3_RightForeArm
-    100114: Character3_RightHand
-    100116: Character3_RightLeg
-    100118: Character3_RightShoulder
-    100120: Character3_RightToeBase
-    100122: Character3_RightUpLeg
-    100124: Character3_Spine
-    100126: Character3_Spine1
-    100128: Character3_Spine2
-    100130: //RootNode
-    100132: L_Arm
-    100134: L_Arm 1
-    100136: L_Eye
-    100138: L_Eye1
-    100140: L_Leg
-    100142: L_Leg 1
-    100144: pCube1
-    100146: pCube2
-    100148: R_Arm
-    100150: R_Arm 1
-    100152: R_Leg
-    100154: R_Leg 1
-    100156: Root
-    400000: Body
+    100084: Character3_Reference
+    400000: //RootNode
     400002: Character3_Ctrl_ChestEndEffector
     400004: Character3_Ctrl_ChestOriginEffector
     400006: Character3_Ctrl_Head
@@ -124,70 +88,9 @@ ModelImporter:
     400078: Character3_Ctrl_Spine
     400080: Character3_Ctrl_Spine1
     400082: Character3_Ctrl_Spine2
-    400084: Character3_Head
-    400086: Character3_Hips
-    400088: Character3_LeftArm
-    400090: Character3_LeftFoot
-    400092: Character3_LeftForeArm
-    400094: Character3_LeftHand
-    400096: Character3_LeftLeg
-    400098: Character3_LeftShoulder
-    400100: Character3_LeftToeBase
-    400102: Character3_LeftUpLeg
-    400104: Character3_Neck
-    400106: Character3_Reference
-    400108: Character3_RightArm
-    400110: Character3_RightFoot
-    400112: Character3_RightForeArm
-    400114: Character3_RightHand
-    400116: Character3_RightLeg
-    400118: Character3_RightShoulder
-    400120: Character3_RightToeBase
-    400122: Character3_RightUpLeg
-    400124: Character3_Spine
-    400126: Character3_Spine1
-    400128: Character3_Spine2
-    400130: //RootNode
-    400132: L_Arm
-    400134: L_Arm 1
-    400136: L_Eye
-    400138: L_Eye1
-    400140: L_Leg
-    400142: L_Leg 1
-    400144: pCube1
-    400146: pCube2
-    400148: R_Arm
-    400150: R_Arm 1
-    400152: R_Leg
-    400154: R_Leg 1
-    400156: Root
-    2100000: MatPurple
-    2100002: MatYellow
-    2100004: MatLeg
-    2100006: MatBody
-    2100008: MatEye
-    2300000: pCube1
-    2300002: pCube2
-    3300000: pCube1
-    3300002: pCube2
-    4300000: pCube1
-    4300002: pCube2
-    4300004: L_Leg
-    4300006: R_Arm
-    4300008: R_Leg
-    4300010: L_Arm
-    4300012: Body
-    4300014: L_Eye
-    4300016: L_Eye1
-    7400000: Take 001
+    400084: Character3_Reference
+    7400000: APose
     9500000: //RootNode
-    13700000: Body
-    13700002: L_Arm 1
-    13700004: L_Eye
-    13700006: L_Eye1
-    13700008: L_Leg 1
-    13700010: R_Arm 1
-    13700012: R_Leg 1
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -215,7 +118,35 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: APose
+      takeName: Take 001
+      firstFrame: -10
+      lastFrame: 0
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -239,7 +170,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
+    previousCalculatedGlobalScale: 0.01
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
