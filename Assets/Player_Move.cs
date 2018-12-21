@@ -8,7 +8,12 @@ public class Player_Move : BlockBase {
     Animator animator;
     // Use this for initialization
     void Start () {
-        animator = GetComponentsInChildren<Animator>()[0];
+        try
+        {
+            animator = GetComponentsInChildren<Animator>()[0];
+        }
+        catch {
+        }
     }
 	
 	// Update is called once per frame
@@ -16,7 +21,8 @@ public class Player_Move : BlockBase {
 		float h_Input = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
 		float z_Input = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
 
-        animator.SetBool("Walking", h_Input + z_Input > 0);
+        if(animator)
+            animator.SetBool("Walking", h_Input + z_Input > 0);
         transform.Rotate(0, h_Input, 0);
 		transform.Translate(0, 0, z_Input);
 

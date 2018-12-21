@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Stackable))]
+[RequireComponent(typeof(Collider))]
 public class StackableTrigger : StackableChild {
 
 	// Use this for initialization
