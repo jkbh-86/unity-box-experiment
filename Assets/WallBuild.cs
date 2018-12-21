@@ -5,10 +5,10 @@ using UnityEngine;
 public class WallBuild : MonoBehaviour {
     // Use this for initialization
     public GameObject blockPrefab = null;
-
+    public string wallPng;
     void Start()
     {
-        var image = Resources.Load<Texture2D>("walls_level2");
+        var image = Resources.Load<Texture2D>(wallPng);
         float y = 0.5f;
         float z = 0.0f;
         // i is col, j is row

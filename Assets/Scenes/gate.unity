@@ -325,6 +325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockPrefab: {fileID: 1190688886702724, guid: c8ce0d3ef6cbd384f8755fd34f07747d,
     type: 2}
+  wallPng: walls_level2
 --- !u!1 &1560155852
 GameObject:
   m_ObjectHideFlags: 0
