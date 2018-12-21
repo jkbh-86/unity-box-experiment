@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Move : MonoBehaviour {
+public class Player_Move : BlockBase {
 
 	public List<Stackable> BodyStack;
     Animator animator;
@@ -42,17 +42,17 @@ public class Player_Move : MonoBehaviour {
 		return null;
 	}
 	void AddStackable(Stackable stackable) {
-		ToggleRigidBodyKinematic(true);
+		this.ToggleRigidBodyKinematic(true);
 
 		//Increase player y-coord by amount to rest on top of stackable		
 		//float stackableTop = stackable.GetTop();
 		//Vector3 targetPos = stackable.GetTopCenter();
 
-		//We want the bottom of the player cube to be at the top of the stackable
+		//We want the bottom center of the player cube to be at the top center of the stackable
 		//float targetY = GetRelativeYTarget(stackableTop);
 		//this.transform.Translate(0, GetRelativeYTarget(stackableTop), 0, Space.Self);
 
-		Vector3 playerBottomCenter = this.GetPlayerBottomCenter();
+		Vector3 playerBottomCenter = this.GetBottomCenter();
 		Vector3 stackableTopCenter = stackable.GetTopCenter();
 		Vector3 targetTranslation = stackableTopCenter - playerBottomCenter;
 
@@ -60,6 +60,11 @@ public class Player_Move : MonoBehaviour {
 		Debug.Log($"Stackable top center: {stackableTopCenter.x}, {stackableTopCenter.y}, {stackableTopCenter.z}");
 		Debug.Log($"Target Relative Vector: {targetTranslation.x}, {targetTranslation.y}, {targetTranslation.z}");
 
+
+		//TODO: sort out vector bug, we only accurately pop on the top center if the player and 
+		// the passed in stackable object are aligned in the same way
+		// ie. the local z-axes are pointing in the same direction
+		// I think this might be a issue with local vs. world corrdinate systems and my own confusion about working with them
 		this.transform.Translate(targetTranslation);
 		
 		BodyStack.Add(stackable);
@@ -67,7 +72,7 @@ public class Player_Move : MonoBehaviour {
 	}
 
 	private float GetRelativeYTarget(float stackableTop) {
-		float playerBottom = GetPlayerBottom();
+		float playerBottom = this.GetBottom();
 
 		float targetY = stackableTop;
 		if (playerBottom < stackableTop) {
@@ -84,27 +89,5 @@ public class Player_Move : MonoBehaviour {
 		
 		Vector3 bounds = this.GetComponent<Collider>().bounds.size;
 		return stackableTop + bounds.y/2;
-	}
-
-	private float GetPlayerBottom() {
-		Vector3 bounds = this.GetComponent<Collider>().bounds.size;
-		return this.transform.position.y - bounds.y/2;
-	}
-
-	private Vector3 GetPlayerBottomCenter() {
-		return new Vector3(
-			this.transform.position.x,
-			this.transform.position.y - GetComponent<Collider>().bounds.extents.y,
-			this.transform.position.z
-		);
-	}
-
-	private void ToggleRigidBodyKinematic(bool toggle) {
-		Rigidbody rb = GetRigidBody();
-		rb.isKinematic = toggle;
-	}
-
-	private Rigidbody GetRigidBody() {
-		return GetComponent<Rigidbody>();
 	}
 }

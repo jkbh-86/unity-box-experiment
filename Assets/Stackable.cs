@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 ///Stackable should be a base class that other objects can inherit from
-public class Stackable : MonoBehaviour {
+public class Stackable : BlockBase {
 
 	public bool playerNear;
 
@@ -37,6 +37,8 @@ public class Stackable : MonoBehaviour {
 		//Don't want to trigger events on player being near
 		TogglePlayerCollider(false);
 
+		//TODO: Rotate block to match same orientation as player
+
 		this.transform.parent = Player.transform;
 	}
 
@@ -44,34 +46,13 @@ public class Stackable : MonoBehaviour {
 		ToggleRigidBodyKinematic(false);
 	}
 
-	public float GetTop() {
-		Vector3 stackableBounds = GetComponent<Collider>().bounds.size;
-		return this.transform.position.y + stackableBounds.y/2;
-	}
-
-	public Vector3 GetTopCenter() {
-		return new Vector3(
-			this.transform.position.x, 
-			this.transform.position.y + GetComponent<Collider>().bounds.extents.y,
-			this.transform.position.z
-		);
-	}
-
 	public void TogglePlayerCollider(bool toggle) {
 		GameObject trigger = GetTriggerCollider();
 		trigger.GetComponent<Collider>().enabled = toggle;
-	}
-
-	public void ToggleRigidBodyKinematic(bool toggle) {
-		Rigidbody rb = GetRigidBody();
-		rb.isKinematic = toggle;
 	}
 
 	private GameObject GetTriggerCollider() {
 		return this.gameObject.transform.Find("StackableTrigger").gameObject;
 	}
 
-	private Rigidbody GetRigidBody() {
-		return GetComponent<Rigidbody>();
-	}
 }
