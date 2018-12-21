@@ -8,7 +8,7 @@ public class WallBuild : MonoBehaviour {
 
     void Start()
     {
-        var image = Resources.Load<Texture2D>("walls_test");
+        var image = Resources.Load<Texture2D>("walls_level2");
         float y = 0.5f;
         float z = 0.0f;
         // i is col, j is row
