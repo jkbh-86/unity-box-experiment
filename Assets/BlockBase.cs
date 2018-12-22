@@ -68,6 +68,7 @@ public class BlockBase : MonoBehaviour {
 	/// </summary>
 	/// <param name="toggle"></param>
 	protected void ToggleRigidBodyKinematic(bool toggle) {
+        return;
 		Rigidbody rb = GetRigidBody();
 		rb.isKinematic = toggle;
 	}
