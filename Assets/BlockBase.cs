@@ -9,21 +9,31 @@ public class BlockBase : MonoBehaviour {
 	// Update is called once per frame
 	void Update () { }
 
-
+	/// <summary>
+	/// Returns the size of the collider bounds in the y-axis
+	/// </summary>
+	/// <returns></returns>
+	public virtual float GetHeight()
+	{
+		return GetComponent<Collider>().bounds.size.y;
+	}
 
     /// <summary>
     /// Gets a float value representing the position of the top block face along the world y-axis
     /// </summary>
     /// <returns></returns>
-    public float GetTop() {
-		return this.transform.position.y + GetComponent<Collider>().bounds.extents.y;
+    public virtual float GetTop() {
+		Collider collider = GetComponent<Collider>();
+		return collider.bounds.center.y + collider.bounds.extents.y;
+		//return this.transform.position.y + collider.bounds.center.y + collider.bounds.extents.y;
+		//return this.transform.position.y + GetComponent<Collider>().bounds.extents.y;
 	}
 
     /// <summary>
     /// Gets a float value representing the position of the bottom block face along the world y-axis
     /// </summary>
     /// <returns></returns>
-    public float GetBottom() {
+    public virtual float GetBottom() {
 		return this.transform.position.y - GetComponent<Collider>().bounds.extents.y;
 	}
 
@@ -32,7 +42,7 @@ public class BlockBase : MonoBehaviour {
     /// on the top side of the object in world coordinates
     /// </summary>
     /// <returns></returns>
-	public Vector3 GetTopCenter() {
+	public virtual Vector3 GetTopCenter() {
 		return new Vector3(
 			this.transform.position.x, 
 			this.GetTop(),
@@ -45,7 +55,7 @@ public class BlockBase : MonoBehaviour {
     /// on the bottom side of the object in world coordinates
     /// </summary>
     /// <returns></returns>
-	public Vector3 GetBottomCenter() {
+	public virtual Vector3 GetBottomCenter() {
 		return new Vector3(
 			this.transform.position.x, 
 			this.GetBottom(),

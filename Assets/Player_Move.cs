@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Player_Move : BlockBase {
 
-	public List<Stackable> BodyStack;
+	public BlockStack BodyStack;
+	public bool BlocksStackUp = true;
     Animator animator;
     // Use this for initialization
     void Start () {
+		if (BodyStack == null) { BodyStack = new BlockStack(); }
         animator = GetComponentsInChildren<Animator>()[0];
     }
 	
@@ -41,9 +43,44 @@ public class Player_Move : BlockBase {
 
 		return null;
 	}
-	void AddStackable(Stackable stackable) {
+	private void AddStackable(Stackable stackable) {
 		this.ToggleRigidBodyKinematic(true);
 
+		if (this.BlocksStackUp)
+		{
+			StackOnTop(stackable);
+		}
+		else
+		{
+			StackOnBottom(stackable);
+		}
+
+		BodyStack.Stack.Add(stackable);
+		stackable.OnAddedToPlayer(this.gameObject);
+
+		//If we do this, hilarity ensues
+		//this.ToggleRigidBodyKinematic(false);
+	}
+
+	/// <summary>
+	/// Updates the passed in Stackables transform by moving the object to be centered above the player
+	/// </summary>
+	/// <param name="stackable"></param>
+	private void StackOnTop(Stackable stackable)
+	{
+		Vector3 stackableBottomCenter = stackable.GetBottomCenter();
+		Vector3 playerTopCenter = this.GetTopCenter();
+		Vector3 targetTranslation = playerTopCenter - stackableBottomCenter;
+
+		stackable.transform.Translate(targetTranslation, Space.World);
+	}
+
+	/// <summary>
+	/// Updates the players transform by moving the player above the center of the Stackable object
+	/// </summary>
+	/// <param name="stackable"></param>
+	private void StackOnBottom(Stackable stackable)
+	{
 		//Increase player y-coord by amount to rest on top of stackable		
 		//float stackableTop = stackable.GetTop();
 		//Vector3 targetPos = stackable.GetTopCenter();
@@ -65,29 +102,24 @@ public class Player_Move : BlockBase {
 		// the passed in stackable object are aligned in the same way
 		// ie. the local z-axes are pointing in the same direction
 		// I think this might be a issue with local vs. world corrdinate systems and my own confusion about working with them
-		this.transform.Translate(targetTranslation);
-		
-		BodyStack.Add(stackable);
-		stackable.OnAddedToPlayer(this.gameObject);
+		this.transform.Translate(targetTranslation, Space.World);
 	}
 
-	private float GetRelativeYTarget(float stackableTop) {
-		float playerBottom = this.GetBottom();
-
-		float targetY = stackableTop;
-		if (playerBottom < stackableTop) {
-			targetY = stackableTop - playerBottom;
-		}
-		else if (playerBottom > stackableTop) {
-			targetY = playerBottom - stackableTop;
-		}
-
-		return targetY;
+	/// <summary>
+	/// Gets a float value representing the y-axis value of the player top plus the height of the player BlockStack
+	/// </summary>
+	/// <returns></returns>
+	public override float GetTop()
+	{
+		return base.GetTop() + this.BodyStack.GetStackHeight();
 	}
 
-	private float GetWorldYTarget(float stackableTop) {
-		
-		Vector3 bounds = this.GetComponent<Collider>().bounds.size;
-		return stackableTop + bounds.y/2;
+	public override Vector3 GetTopCenter()
+	{
+		return new Vector3(
+			this.transform.position.x, 
+			this.GetTop(),
+			this.transform.position.z
+		);
 	}
 }
