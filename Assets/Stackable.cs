@@ -37,8 +37,10 @@ public class Stackable : BlockBase {
 		//Don't want to trigger events on player being near
 		TogglePlayerCollider(false);
 
-		//TODO: Rotate block to match same orientation as player
+		//Update object rotation to match player
+		this.transform.rotation = Player.transform.rotation;
 
+		//Parent the transform to the player
 		this.transform.parent = Player.transform;
 	}
 
