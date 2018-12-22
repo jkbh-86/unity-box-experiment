@@ -32,7 +32,7 @@ public class Stackable : BlockBase {
 
 		//Player is parent now, don't need gravity?
 		//Should need it, because transform is now governed by parent
-		ToggleRigidBodyKinematic(true);
+		//ToggleRigidBodyKinematic(true);
 
 		//Don't want to trigger events on player being near
 		TogglePlayerCollider(false);
@@ -45,7 +45,7 @@ public class Stackable : BlockBase {
 	}
 
 	public void OnRemovedFromPlayer() {
-		ToggleRigidBodyKinematic(false);
+		//ToggleRigidBodyKinematic(false);
 	}
 
 	public void TogglePlayerCollider(bool toggle) {

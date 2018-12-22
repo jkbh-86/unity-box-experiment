@@ -20,25 +20,40 @@ public class Player_Move : BlockBase {
 	
 	// Update is called once per frame
 	void Update () {
+		//TODO: replace single update function with access to PlayerState class update?
+		// Divide actions across multiple states?
+
+		// When a specific context or player action arises that causes the player to switch states, we update a 
+		// property that contains the current state
+
+		// Create PlayerStateBase and PlayerStateChild classes where base class virtual functions
+		// provide default, overrideable behaviour available to all child classes
+
+		// Have default state that handles regular actions, and provides means to switch states with button toggles or holds
+
 		float h_Input = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
 		float z_Input = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
 
         if(animator)
             animator.SetBool("Walking", h_Input + z_Input > 0);
+
         transform.Rotate(0, h_Input, 0);
 		transform.Translate(0, 0, z_Input);
 
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			Stackable stackable = GetNearestStackable();
-			if (stackable != null)
+			if (Input.GetKeyDown(KeyCode.LeftShift))
 			{
-				AddStackable(stackable);
+				RemoveStackable(this.BodyStack.GetLastAdded());
+			}
+			else
+			{
+				AddStackable(GetNearestStackable());	
 			}
 		}
 	}
 
-	Stackable GetNearestStackable() {
+	private Stackable GetNearestStackable() {
 		Object[] foundStackables = FindObjectsOfType(typeof(Stackable));
 		for (int i = 0; i < foundStackables.Length; i++)
 		{
@@ -50,22 +65,32 @@ public class Player_Move : BlockBase {
 		return null;
 	}
 	private void AddStackable(Stackable stackable) {
-		this.ToggleRigidBodyKinematic(true);
-
-		if (this.BlocksStackUp)
+		if (stackable != null)
 		{
-			StackOnTop(stackable);
+			//this.ToggleRigidBodyKinematic(true);
+
+			if (this.BlocksStackUp)
+			{
+				StackOnTop(stackable);
+			}
+			else
+			{
+				StackOnBottom(stackable);
+			}
+
+			BodyStack.AddStackable(stackable);
+			stackable.OnAddedToPlayer(this.gameObject);
+
+			//If we do this, hilarity ensues
+			//this.ToggleRigidBodyKinematic(false);
 		}
-		else
+	}
+	private void RemoveStackable(Stackable stackable)
+	{
+		if (stackable != null)
 		{
-			StackOnBottom(stackable);
+			//TODO: place object on ground in front of player
 		}
-
-		BodyStack.Stack.Add(stackable);
-		stackable.OnAddedToPlayer(this.gameObject);
-
-		//If we do this, hilarity ensues
-		//this.ToggleRigidBodyKinematic(false);
 	}
 
 	/// <summary>
@@ -87,27 +112,10 @@ public class Player_Move : BlockBase {
 	/// <param name="stackable"></param>
 	private void StackOnBottom(Stackable stackable)
 	{
-		//Increase player y-coord by amount to rest on top of stackable		
-		//float stackableTop = stackable.GetTop();
-		//Vector3 targetPos = stackable.GetTopCenter();
-
-		//We want the bottom center of the player cube to be at the top center of the stackable
-		//float targetY = GetRelativeYTarget(stackableTop);
-		//this.transform.Translate(0, GetRelativeYTarget(stackableTop), 0, Space.Self);
-
 		Vector3 playerBottomCenter = this.GetBottomCenter();
 		Vector3 stackableTopCenter = stackable.GetTopCenter();
 		Vector3 targetTranslation = stackableTopCenter - playerBottomCenter;
 
-		Debug.Log($"Player bottom center: {playerBottomCenter.x}, {playerBottomCenter.y}, {playerBottomCenter.z}");
-		Debug.Log($"Stackable top center: {stackableTopCenter.x}, {stackableTopCenter.y}, {stackableTopCenter.z}");
-		Debug.Log($"Target Relative Vector: {targetTranslation.x}, {targetTranslation.y}, {targetTranslation.z}");
-
-
-		//TODO: sort out vector bug, we only accurately pop on the top center if the player and 
-		// the passed in stackable object are aligned in the same way
-		// ie. the local z-axes are pointing in the same direction
-		// I think this might be a issue with local vs. world corrdinate systems and my own confusion about working with them
 		this.transform.Translate(targetTranslation, Space.World);
 	}
 
