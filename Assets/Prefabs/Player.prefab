@@ -2547,7 +2547,7 @@ MonoBehaviour:
   CollisionRadius: 1
   Strength: 5
   Dampening: 0.3
-  VelocityStretch: 0.8
+  VelocityStretch: 1
   Test: 0
   Squash: 0
 --- !u!137 &137100172754771318
