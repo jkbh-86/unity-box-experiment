@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Player_Settings))]
 public class Player_Move : BlockBase {
-
 	private IPlayerState PlayerState;
 	public BlockStack BodyStack;
-	public PlayerSettings Settings;
+	public Player_Settings Settings;
 	
     //Animator animator;
     // Use this for initialization
     void Start () {
       if (BodyStack == null) { BodyStack = new BlockStack(); }
 	  PlayerState = new PlayerState_Default(this);
-	  Settings = new PlayerSettings();
+	  Settings = GetComponentInParent<Player_Settings>(); //new Player_Settings();
+	  
       /* try
       {
           animator = GetComponentsInChildren<Animator>()[0];
@@ -144,70 +145,5 @@ public class Player_Move : BlockBase {
 			this.GetTop(),
 			this.transform.position.z
 		);
-	}
-}
-
-public interface IPlayerState
-{
-    Player_Move Player { get; set; }
-
-    void Update();
-}
-
-public abstract class PlayerStateBase : MonoBehaviour
-{
-	public Player_Move Player { get; set; }
-	public PlayerStateBase(Player_Move player)
-	{
-		this.Player = player;
-	}
-
-	public virtual void Update()
-	{
-
-	}
-}
-
-public class PlayerState_Default : PlayerStateBase, IPlayerState
-{
-	Animator animator;
-
-	public PlayerState_Default(Player_Move player)
-		:base(player)
-	{
-		try
-      	{
-       		animator = Player.GetComponentsInChildren<Animator>()[0];   
-      	}
-      	catch {}
-	}
-
-	public override void Update()
-	{
-		Player_Walk();
-
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			if (Input.GetKeyDown(KeyCode.LeftShift))
-			{
-				Player.RemoveStackable(Player.BodyStack.GetLastAdded());
-			}
-			else
-			{
-				Player.AddStackable(Player.GetNearestStackable());	
-			}
-		}
-	}
-
-	private void Player_Walk()
-	{
-		float h_Input = Input.GetAxis("Horizontal") * Time.deltaTime * Player.Settings.TurnSpeed; // 150.0f;
-		float z_Input = Input.GetAxis("Vertical") * Time.deltaTime * Player.Settings.WalkSpeed;   //3.0f;
-
-        if(animator)
-            animator.SetBool("Walking", h_Input + z_Input > 0);
-
-        Player.transform.Rotate(0, h_Input, 0);
-		Player.transform.Translate(0, 0, z_Input);
 	}
 }

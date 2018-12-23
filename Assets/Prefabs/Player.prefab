@@ -374,7 +374,8 @@ GameObject:
   - component: {fileID: 23313585197206320}
   - component: {fileID: 65237202621874966}
   - component: {fileID: 54080123810155662}
-  - component: {fileID: 114417363046958218}
+  - component: {fileID: 114755085097351914}
+  - component: {fileID: 114638576655573056}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2519,7 +2520,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114417363046958218
+--- !u!114 &114638576655573056
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2531,7 +2532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BodyStack: {fileID: 0}
-  BlocksStackUp: 1
+  Settings: {fileID: 0}
 --- !u!114 &114702562129700702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2550,6 +2551,20 @@ MonoBehaviour:
   VelocityStretch: 1
   Test: 0
   Squash: 0
+--- !u!114 &114755085097351914
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1303082526366630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84cb41500504bf54d923f96549f1944b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TurnSpeed: 150
+  WalkSpeed: 3
+  BlocksStackUp: 1
 --- !u!137 &137100172754771318
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
