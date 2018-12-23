@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class Player_Move : BlockBase {
 
+	private IPlayerState PlayerState;
 	public BlockStack BodyStack;
-	public bool BlocksStackUp = true;
-    Animator animator;
+	public PlayerSettings Settings;
+	
+    //Animator animator;
     // Use this for initialization
     void Start () {
       if (BodyStack == null) { BodyStack = new BlockStack(); }
-      try
+	  PlayerState = new PlayerState_Default(this);
+	  Settings = new PlayerSettings();
+      /* try
       {
           animator = GetComponentsInChildren<Animator>()[0];
       }
       catch {
-      }
+      } */
     }
 	
 	// Update is called once per frame
@@ -31,7 +35,12 @@ public class Player_Move : BlockBase {
 
 		// Have default state that handles regular actions, and provides means to switch states with button toggles or holds
 
-		float h_Input = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
+		// How does this work though? Actions performed would require using data from the player that might be private
+		// Do we pass in the player object and call public facing functions on it?
+
+		this.PlayerState.Update();
+
+		/* float h_Input = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
 		float z_Input = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
 
         if(animator)
@@ -50,10 +59,10 @@ public class Player_Move : BlockBase {
 			{
 				AddStackable(GetNearestStackable());	
 			}
-		}
+		} */
 	}
 
-	private Stackable GetNearestStackable() {
+	public Stackable GetNearestStackable() {
 		Object[] foundStackables = FindObjectsOfType(typeof(Stackable));
 		for (int i = 0; i < foundStackables.Length; i++)
 		{
@@ -64,12 +73,12 @@ public class Player_Move : BlockBase {
 
 		return null;
 	}
-	private void AddStackable(Stackable stackable) {
+	public void AddStackable(Stackable stackable) {
 		if (stackable != null)
 		{
 			//this.ToggleRigidBodyKinematic(true);
 
-			if (this.BlocksStackUp)
+			if (this.Settings.BlocksStackUp)
 			{
 				StackOnTop(stackable);
 			}
@@ -85,7 +94,7 @@ public class Player_Move : BlockBase {
 			//this.ToggleRigidBodyKinematic(false);
 		}
 	}
-	private void RemoveStackable(Stackable stackable)
+	public void RemoveStackable(Stackable stackable)
 	{
 		if (stackable != null)
 		{
@@ -135,5 +144,70 @@ public class Player_Move : BlockBase {
 			this.GetTop(),
 			this.transform.position.z
 		);
+	}
+}
+
+public interface IPlayerState
+{
+    Player_Move Player { get; set; }
+
+    void Update();
+}
+
+public abstract class PlayerStateBase : MonoBehaviour
+{
+	public Player_Move Player { get; set; }
+	public PlayerStateBase(Player_Move player)
+	{
+		this.Player = player;
+	}
+
+	public virtual void Update()
+	{
+
+	}
+}
+
+public class PlayerState_Default : PlayerStateBase, IPlayerState
+{
+	Animator animator;
+
+	public PlayerState_Default(Player_Move player)
+		:base(player)
+	{
+		try
+      	{
+       		animator = Player.GetComponentsInChildren<Animator>()[0];   
+      	}
+      	catch {}
+	}
+
+	public override void Update()
+	{
+		Player_Walk();
+
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			if (Input.GetKeyDown(KeyCode.LeftShift))
+			{
+				Player.RemoveStackable(Player.BodyStack.GetLastAdded());
+			}
+			else
+			{
+				Player.AddStackable(Player.GetNearestStackable());	
+			}
+		}
+	}
+
+	private void Player_Walk()
+	{
+		float h_Input = Input.GetAxis("Horizontal") * Time.deltaTime * Player.Settings.TurnSpeed; // 150.0f;
+		float z_Input = Input.GetAxis("Vertical") * Time.deltaTime * Player.Settings.WalkSpeed;   //3.0f;
+
+        if(animator)
+            animator.SetBool("Walking", h_Input + z_Input > 0);
+
+        Player.transform.Rotate(0, h_Input, 0);
+		Player.transform.Translate(0, 0, z_Input);
 	}
 }
