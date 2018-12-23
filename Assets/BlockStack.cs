@@ -5,7 +5,8 @@ using UnityEngine;
 /// <summary>
 /// Maintains the stack of blocks on the player and provides functions for returning data about that stack
 /// </summary>
-public class BlockStack : MonoBehaviour {
+public class BlockStack
+{
     private List<Stackable> Stack;
     
     public BlockStack()
@@ -16,6 +17,11 @@ public class BlockStack : MonoBehaviour {
     public void AddStackable(Stackable stackable)
     {
         this.Stack.Add(stackable);
+    }
+
+    public void RemoveStackable(Stackable stackable)
+    {
+        this.Stack.Remove(stackable);
     }
 
     public float GetStackHeight()

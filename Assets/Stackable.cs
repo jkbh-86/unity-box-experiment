@@ -19,15 +19,17 @@ public class Stackable : BlockBase {
 
 	public void OnPlayerNearEnter() {
 		this.playerNear = true;
-		Debug.Log("Player in range");
+		//Debug.Log("Player in range");
 	}
 
 	public void OnPlayerNearExit() {
 		this.playerNear = false;
-		Debug.Log("Player in range");
+		//Debug.Log("Player out of range");
 	}
 
 	public void OnAddedToPlayer(GameObject Player) {
+		this.ToggleRigidBodyKinematic(true);
+
 		this.playerNear = false;
 
 		//Player is parent now, don't need gravity?
@@ -45,7 +47,10 @@ public class Stackable : BlockBase {
 	}
 
 	public void OnRemovedFromPlayer() {
-		//ToggleRigidBodyKinematic(false);
+		this.ToggleRigidBodyKinematic(false);
+		this.transform.parent = null;
+
+		this.TogglePlayerCollider(true);
 	}
 
 	public void TogglePlayerCollider(bool toggle) {

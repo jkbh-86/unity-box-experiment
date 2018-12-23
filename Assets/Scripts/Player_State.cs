@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//TODO: Look into setting up a proper state machine? 
+// Ref: https://unity3d.com/learn/tutorials/topics/navigation/transitions-between-states
+
 public interface IPlayerState
 {
 	string StateName { get; }
@@ -45,22 +48,26 @@ public class PlayerState_Default : PlayerStateBase, IPlayerState
 	{
 		Player_Walk();
 
-		if (Input.GetKeyDown(KeyCode.Space))
+		if (Input.GetKey(KeyCode.LeftShift))
 		{
-			if (Input.GetKeyDown(KeyCode.LeftShift))
+			if (Input.GetKeyDown(KeyCode.Space))
 			{
 				Player.RemoveStackable(Player.BodyStack.GetLastAdded());
 			}
-			else
+		}
+		else
+		{
+			if (Input.GetKeyDown(KeyCode.Space))
 			{
-				Player.AddStackable(Player.GetNearestStackable());	
+				Player.AddStackable(Player.GetNearestStackable());
 			}
 		}
+		
 
-		if (Input.GetKeyDown(KeyCode.LeftShift))
+		/* if (Input.GetKeyDown(KeyCode.LeftShift))
 		{
 			Player.ChangePlayerState(new PlayerState_Idle(Player));
-		}
+		} */
 	}
 
 	private void Player_Walk()

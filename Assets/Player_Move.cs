@@ -5,8 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Player_Settings))]
 public class Player_Move : BlockBase {
 	private IPlayerState PlayerState;
-	public BlockStack BodyStack;
-	public Player_Settings Settings;
+	[HideInInspector] public BlockStack BodyStack;
+	[HideInInspector] public Player_Settings Settings;
 	
     //Animator animator;
     // Use this for initialization
@@ -78,7 +78,6 @@ public class Player_Move : BlockBase {
 		if (stackable != null)
 		{
 			//this.ToggleRigidBodyKinematic(true);
-
 			if (this.Settings.BlocksStackUp)
 			{
 				StackOnTop(stackable);
@@ -100,6 +99,8 @@ public class Player_Move : BlockBase {
 		if (stackable != null)
 		{
 			//TODO: place object on ground in front of player
+			this.BodyStack.RemoveStackable(stackable);
+			stackable.OnRemovedFromPlayer();
 		}
 	}
 
