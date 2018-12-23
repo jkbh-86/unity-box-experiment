@@ -103,6 +103,11 @@ public class Player_Move : BlockBase {
 		}
 	}
 
+	public void ChangePlayerState(IPlayerState playerState)
+	{
+		this.PlayerState = playerState;
+	}
+
 	/// <summary>
 	/// Updates the passed in Stackables transform by moving the object to be centered above the player
 	/// </summary>
