@@ -15,7 +15,10 @@ public class BlockBase : MonoBehaviour {
 	/// <returns></returns>
 	public virtual float GetHeight()
 	{
-		return GetComponent<Collider>().bounds.size.y;
+		//Updated: BoxCollider.size gives us local space values, Collider.bounds.size gives us world-space
+		// returning world space sizes if the object is rotated doesn't give an accurate value
+		BoxCollider collider = GetComponent<BoxCollider>();
+		return collider.size.y; //.bounds.size.y;
 	}
 
     /// <summary>
@@ -23,8 +26,9 @@ public class BlockBase : MonoBehaviour {
     /// </summary>
     /// <returns></returns>
     public virtual float GetTop() {
-		Collider collider = GetComponent<Collider>();
-		return collider.bounds.center.y + collider.bounds.extents.y;
+		BoxCollider collider = GetComponent<BoxCollider>();
+		return collider.bounds.center.y + collider.size.y/2;// .bounds.extents.y;
+		
 		//return this.transform.position.y + collider.bounds.center.y + collider.bounds.extents.y;
 		//return this.transform.position.y + GetComponent<Collider>().bounds.extents.y;
 	}
@@ -34,7 +38,11 @@ public class BlockBase : MonoBehaviour {
     /// </summary>
     /// <returns></returns>
     public virtual float GetBottom() {
-		return this.transform.position.y - GetComponent<Collider>().bounds.extents.y;
+		BoxCollider collider = GetComponent<BoxCollider>();
+		//return this.transform.position.y - GetComponent<Collider>().bounds.extents.y;
+
+		//Updated: use local y-axis size, rather than possible world-space rotated value
+		return collider.bounds.center.y - collider.size.y/2;
 	}
 
     /// <summary>

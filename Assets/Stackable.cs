@@ -9,7 +9,6 @@ public class Stackable : BlockBase {
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
@@ -29,7 +28,7 @@ public class Stackable : BlockBase {
 
 	public void OnAddedToPlayer(GameObject Player) {
 		this.ToggleRigidBodyKinematic(true);
-
+		this.ToggleBoxCollider(false);
 		this.playerNear = false;
 
 		//Player is parent now, don't need gravity?
@@ -48,6 +47,7 @@ public class Stackable : BlockBase {
 
 	public void OnRemovedFromPlayer() {
 		this.ToggleRigidBodyKinematic(false);
+		this.ToggleBoxCollider(true);
 		this.transform.parent = null;
 
 		this.TogglePlayerCollider(true);
@@ -58,8 +58,13 @@ public class Stackable : BlockBase {
 		trigger.GetComponent<Collider>().enabled = toggle;
 	}
 
+	public void ToggleBoxCollider(bool toggle) {
+		this.GetComponent<BoxCollider>().enabled = toggle;
+	}
+
 	private GameObject GetTriggerCollider() {
 		return this.gameObject.transform.Find("StackableTrigger").gameObject;
 	}
+
 
 }

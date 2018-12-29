@@ -76,7 +76,7 @@ public class PlayerState_Default : PlayerStateBase, IPlayerState
 		float z_Input = Input.GetAxis("Vertical") * Time.deltaTime * Player.Settings.WalkSpeed;   //3.0f;
 
         if(animator)
-            animator.SetBool("Walking", h_Input + z_Input > 0);
+            animator.SetBool("Walking", h_Input + z_Input != 0);
 
         Player.transform.Rotate(0, h_Input, 0);
 		Player.transform.Translate(0, 0, z_Input);

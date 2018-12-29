@@ -80,15 +80,24 @@ public class Player_Move : BlockBase {
 			//this.ToggleRigidBodyKinematic(true);
 			if (this.Settings.BlocksStackUp)
 			{
-				StackOnTop(stackable);
+				this.StackOnTop(stackable);
 			}
 			else
 			{
-				StackOnBottom(stackable);
+				this.StackOnBottom(stackable);
 			}
 
-			BodyStack.AddStackable(stackable);
+			this.BodyStack.AddStackable(stackable);
+			
+			//Update player collision box?
+			// Get height before calling 'OnAddedToPlayer'
+			// Height function uses collider on object
+			// 'OnAddedToPlayer' disables the collider
+			//float stackableHeight = stackable.GetHeight();			
+
 			stackable.OnAddedToPlayer(this.gameObject);
+
+			this.GrowPlayerCollision(stackable.GetHeight());
 
 			//If we do this, hilarity ensues
 			//this.ToggleRigidBodyKinematic(false);
@@ -101,8 +110,38 @@ public class Player_Move : BlockBase {
 			//TODO: place object on ground in front of player
 			this.BodyStack.RemoveStackable(stackable);
 			stackable.OnRemovedFromPlayer();
+
+			//Update player collision box?
+			this.ShrinkPlayerCollision(stackable.GetHeight());
 		}
 	}
+
+	private void GrowPlayerCollision(float height)
+	{
+		BoxCollider playerCollision = GetComponentInParent<BoxCollider>();
+		
+		Vector3 newCenter = new Vector3(
+			playerCollision.center.x, 
+			(this.Settings.BlocksStackUp) ? playerCollision.center.y + height/2 : playerCollision.center.y - height/2, 
+			playerCollision.center.z);
+		Vector3 newSize = new Vector3(playerCollision.size.x, playerCollision.size.y + height, playerCollision.size.z);
+		playerCollision.center = newCenter;
+		playerCollision.size = newSize;
+	}
+
+	private void ShrinkPlayerCollision(float height)
+	{
+		BoxCollider playerCollision = GetComponentInParent<BoxCollider>();
+		Vector3 newCenter = new Vector3(
+			playerCollision.center.x, 
+			(this.Settings.BlocksStackUp) ? playerCollision.center.y - height/2 : playerCollision.center.y + height/2, 
+			playerCollision.center.z);
+		Vector3 newSize = new Vector3(playerCollision.size.x, playerCollision.size.y - height, playerCollision.size.z);
+		playerCollision.center = newCenter;
+		playerCollision.size = newSize;
+	}
+
+	
 
 	public void ChangePlayerState(IPlayerState playerState)
 	{
@@ -137,12 +176,13 @@ public class Player_Move : BlockBase {
 
 	/// <summary>
 	/// Gets a float value representing the y-axis value of the player top plus the height of the player BlockStack
+	/// NOTE: Commented out because the player collision is updating as blocks are added/removed
 	/// </summary>
 	/// <returns></returns>
-	public override float GetTop()
+	/* public override float GetTop()
 	{
 		return base.GetTop() + this.BodyStack.GetStackHeight();
-	}
+	} */
 
 	public override Vector3 GetTopCenter()
 	{
